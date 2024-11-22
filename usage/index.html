@@ -3,16 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Cancer Data Science laboratorn" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Cancer Data Science laboratory" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>nf-core/tumourevo: Usage - tumourevo</title>
+    <title>Usage - tumourevo</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "nf-core/tumourevo: Usage";
+        var mkdocs_page_name = "Usage";
         var mkdocs_page_input_path = "usage.md";
         var mkdocs_page_url = null;
       </script>
@@ -40,19 +40,97 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="..">nf-core/evoverse: Documentation</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../output/">nf-core/tumourevo: Output</a>
+                <li class="toctree-l1"><a class="reference internal" href="../contents/">Contents</a>
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">nf-core/tumourevo: Usage</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Usage</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of contents</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#running-the-pipeline">Running the pipeline</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#quickstart">Quickstart</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#input-sample-sheet-configurations">Input: Sample sheet configurations</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#overview-samplesheet-columns">Overview: Samplesheet Columns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pipeline-modalities">Pipeline modalities</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#variant-calling">Variant calling</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#filtering-data">Filtering data</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#subclonal-deconvolution">Subclonal deconvolution</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#driver-annotation">Driver annotation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#available-tools">Available tools</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#updating-the-pipeline">Updating the pipeline</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reproducibility">Reproducibility</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#main-arguments">Main arguments</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#-profile">-profile</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#job-resources">Job resources</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#automatic-resubmission">Automatic resubmission</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#custom-resource-requests">Custom resource requests</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#other-command-line-parameters">Other command line parameters</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#-outdir">--outdir</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-email">--email</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-email_on_fail">--email_on_fail</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-max_multiqc_email_size">--max_multiqc_email_size</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-name">-name</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-resume">-resume</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-c">-c</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-custom_config_version">--custom_config_version</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-custom_config_base">--custom_config_base</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-max_memory">--max_memory</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-max_time">--max_time</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-max_cpus">--max_cpus</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-plaintext_email">--plaintext_email</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-monochrome_logs">--monochrome_logs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-multiqc_config">--multiqc_config</a>
+    </li>
+        </ul>
+    </li>
     </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../output/">Output</a>
                 </li>
               </ul>
       </div>
@@ -69,7 +147,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">nf-core/tumourevo: Usage</li>
+      <li class="breadcrumb-item active">Usage</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/caravagnalab/tumourevo.git/edit/master/docs/usage.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -82,10 +160,12 @@
                 <h1 id="nf-coretumourevo-usage">nf-core/tumourevo: Usage</h1>
 <h2 id="table-of-contents">Table of contents</h2>
 <ul>
-<li><a href="#nf-coretumourevo-usage">nf-core/tumourevo: Usage</a></li>
+<li><a href="#nf-coretumourevo-usage">nf-core/tumourevo: Usage</a><ul>
 <li><a href="#table-of-contents">Table of contents</a></li>
+</ul>
+</li>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#running-the-pipeline">Running the pipeline</a></li>
+<li><a href="#running-the-pipeline">Running the pipeline</a><ul>
 <li><a href="#quickstart">Quickstart</a></li>
 <li><a href="#input-sample-sheet-configurations">Input: Sample sheet configurations</a><ul>
 <li><a href="#overview-samplesheet-columns">Overview: Samplesheet Columns</a></li>
@@ -93,14 +173,18 @@
 </li>
 <li><a href="#pipeline-modalities">Pipeline modalities</a></li>
 <li><a href="#variant-calling">Variant calling</a><ul>
-<li><a href="#1-multi-sample-variant-calling">1. Multi-sample variant calling</a></li>
+<li><a href="#1-multi-sample-variant-calling">1. Multi-sample variant calling</a><ul>
 <li><a href="#examples">Examples</a></li>
+</ul>
+</li>
 <li><a href="#2-single-sample-variant-calling">2. Single sample variant calling</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#filtering-data">Filtering data</a></li>
 <li><a href="#subclonal-deconvolution">Subclonal deconvolution</a><ul>
-<li><a href="#the-remove_tail-parameter">The <code>remove_tail</code> parameter</a></li>
+<li><a href="#the-remove_tail-parameter">The <code>remove_tail</code> parameter</a><ul>
 <li><a href="#example">Example</a></li>
 </ul>
 </li>
@@ -138,11 +222,13 @@
 </ul>
 </li>
 </ul>
-<h1 id="introduction">Introduction</h1>
+</li>
+</ul>
+<h2 id="introduction">Introduction</h2>
 <p><strong>tumourevo</strong> is a workflow to infer a tumour evolution model from whole-genome sequencing (WGS) data.</p>
 <p>Through the analysis of variant and copy-number calls, it reconstructs the evolutionary process leading to the observed tumour genome. Most of the analyses can be done at mutliple levels: single sample, multiple samples from the same patient (multi-region/longitudinal assays), and multiple patients from distinct cohorts.</p>
-<h1 id="running-the-pipeline">Running the pipeline</h1>
-<h2 id="quickstart">Quickstart</h2>
+<h2 id="running-the-pipeline">Running the pipeline</h2>
+<h3 id="quickstart">Quickstart</h3>
 <p>The typical command for running the pipeline is as follows:</p>
 <pre><code class="language-bash">nextflow run nf-core/tumourevo \
  -r &lt;VERSION&gt; \
@@ -163,7 +249,7 @@ results         # Finished results (configurable, see below)
 .nextflow_log   # Log file from Nextflow
 # Other nextflow hidden files, eg. history of pipeline runs and old logs.
 </code></pre>
-<h2 id="input-sample-sheet-configurations">Input: Sample sheet configurations</h2>
+<h3 id="input-sample-sheet-configurations">Input: Sample sheet configurations</h3>
 <p>You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use the parameter <code>--input</code> to specify its location. It has to be a comma-separated file with at least 5 columns, and a header row as shown in the examples below.</p>
 <p>It is recommended to use the absolute path of the files, but a relative path should also work.</p>
 <p>For the joint analysis of multiple samples, a tumor BAM file is required for each sample, such that the number of reads of a private mutation can be retrieved for all the samples thorugh <code>mpileup</code>.</p>
@@ -171,7 +257,7 @@ results         # Finished results (configurable, see below)
 <p>Multiple patients from the same dataset must be specified with the same <code>dataset</code> ID, and a different <code>patient</code> ID.</p>
 <p><strong>tumourevo</strong> will output sample-specific results in a different directory for <em>each sample</em>, patient-specific results in a common directory for <em>each patient</em>, and dataset-specific results in a common directory for <em>each dataset</em>.</p>
 <p>Output from different workflows, subworkflows and modules will be in a specific directory for each dataset, patient, sample and tool configuration.</p>
-<h3 id="overview-samplesheet-columns">Overview: Samplesheet Columns</h3>
+<h4 id="overview-samplesheet-columns">Overview: Samplesheet Columns</h4>
 <table>
 <thead>
 <tr>
@@ -231,14 +317,14 @@ results         # Finished results (configurable, see below)
 </tbody>
 </table>
 <p>An <a href="https://github.com/caravagnalab/tumourevo/blob/dev/test_input.csv">example samplesheet</a> has been provided with the pipeline.</p>
-<h2 id="pipeline-modalities">Pipeline modalities</h2>
+<h3 id="pipeline-modalities">Pipeline modalities</h3>
 <p>The tumourevo pipeline supports variant annotation, driver annotation, quality control processes, subclonal deconvolution and signature deconvolution analysis through various tools. It can be used to analyse both single sample experiments and longitudinal/multi-region assays, in which multiple samples of the same patient are avaiable.
 As input, you must provide at least information on the samples, the VCF file from one of the supported callers and the output of one of the supported copy number caller. By default, if multiple samples from the same patient are provided, they will be analysed in a multivariate framework (which affects in particular the subclonal deconvolution deconvolution steps) to retrieve information useful in the reconstruction of the evolutionary process. Depending on the variant calling strategy (single sample or multi sample) and the provided input files, different strategies will be applied.</p>
 <!-- aggiungi un riassunto di cosa voglia dire single e multi sample (analisi multivariata, soprattutto per subclonal deconv)
 E' possibile usarla sia nel caso di vc multi sample che indipendente -->
 
-<h2 id="variant-calling">Variant calling</h2>
-<h3 id="1-multi-sample-variant-calling">1. Multi-sample variant calling</h3>
+<h4 id="variant-calling">Variant calling</h4>
+<h5 id="1-multi-sample-variant-calling">1. Multi-sample variant calling</h5>
 <p>Modern tools (ie: Platypus and Mutect2) allow to perform variant calling directly in multisample mode. If the VCFs provided as input are already multisample, no additional step is required.</p>
 <!-- If the variant calling had been performed indepentently on each sample from the same patient, 
 
@@ -247,7 +333,7 @@ If you run the pipeline in `singlesample` mode, all the samples, even if belongi
 <!-- rephrase better -->
 <!-- Si assume che i campioni siano indipendenti e che quindi la subclonal deconv viene svolta cercando popolazioni sottoclonali a lv di singolo campione. Sign deconv si cercano i processi mutagenici comuni in un dataset fatto di elementi indipenti -->
 
-<h4 id="examples">Examples</h4>
+<h6 id="examples">Examples</h6>
 <p>Running the pipeline</p>
 <pre><code class="language-bash">nextflow run nf-core/tumourevo \
  -r &lt;VERSION&gt; \
@@ -261,7 +347,7 @@ If you run the pipeline in `singlesample` mode, all the samples, even if belongi
 dataset1,patient1,S1,N1,patient1_S1.vcf.gz,patient1_S1.vcf.gz.tbi,/CNA/patient1/S1/segments.txt,/CNA/patient1/S1/purity_ploidy.txt,caller,PANCANCER
 dataset1,patient1,S2,N1,patient1_S1.vcf.gz,patient1_S1.vcf.gz.tbi,/CNA/patient1/S2/segments.txt,/CNA/patient1/S2/purity_ploidy.txt,caller,PANCANCER
 </code></pre>
-<h3 id="2-single-sample-variant-calling">2. Single sample variant calling</h3>
+<h5 id="2-single-sample-variant-calling">2. Single sample variant calling</h5>
 <p>If the variant calling performed independently on each sample, even if coming from the same patient, you can provide the BAM and BAI files from each tumor sample. In this way, a classical pileup strategy will be used in order to retrieve the depth for all samples of private mutations, in order to correctly perform the subclonal deconvolution analysis.</p>
 <p>Input file for two patients without joint variant calling, bam files available:</p>
 <pre><code class="language-bash">dataset,patient,sample,normal_sample,vcf,vcf_tbi,cna_segments,cna_extra,cna_caller,cancer_type,tumour_bam,tumour_bai
@@ -272,12 +358,12 @@ dataset1,patient1,S2,N1,patient1_S2.vcf.gz,patient1_S2.vcf.gz.tbi,/CNA/patient1/
 <!-- You can use the `multisample` mode of tumourevo to analyse samples from multi-region and longitudinal assays. This allows you to track in space and time the existing tumor populations, and better understand its heterogeneity. This modality integrates data across multiple samples, thus improving the resolution of subclonal structures and providing insights into the evolutionary dynamics and progression of the tumor.
 Two of the avaiable tools for subclonal deconvolution, `pyclonevi` and `viber` can by-design be run in multi-sample mode, inferring the subclonal structure of samples. If you add `mobster` to the `--tool` parameter when running the pipeline in this modality, it will be run at first on each individual sample (since the tool does not support at the moment multi-sample analysis) in order to recognize neutral tail mutations and remove them. The mutations data manipulated in this way will then be processed by either `pyclone`, `viber` or both using the multivariate subclonal deconvolution as described before.  -->
 
-<h1 id="filtering-data">Filtering data</h1>
-<p>Using the <code>--filter</code> flag it is possible to control how the pipeline handles different steps, in particular regarding the QC workflow. 
-Setting <code>--filter TRUE</code> will </p>
-<h1 id="subclonal-deconvolution">Subclonal deconvolution</h1>
-<h3 id="the-remove_tail-parameter">The <code>remove_tail</code> parameter</h3>
-<h4 id="example">Example</h4>
+<h4 id="filtering-data">Filtering data</h4>
+<p>Using the <code>--filter</code> flag it is possible to control how the pipeline handles different steps, in particular regarding the QC workflow.
+Setting <code>--filter TRUE</code> will</p>
+<h4 id="subclonal-deconvolution">Subclonal deconvolution</h4>
+<h5 id="the-remove_tail-parameter">The <code>remove_tail</code> parameter</h5>
+<h6 id="examples_1">Examples</h6>
 <p>Running the pipeline without mobster</p>
 <pre><code class="language-bash">nextflow run nf-core/tumourevo \
  -r &lt;VERSION&gt; \
@@ -303,7 +389,7 @@ Setting <code>--filter TRUE</code> will </p>
 dataset1,patient1,S1,patient1_S1.vcf.gz,patient1_S1.vcf.gz.tbi,/CNA/patient1/S1,caller
 dataset1,patient1,S2,patient1_S2.vcf.gz,patient1_S2.vcf.gz.tbi,/CNA/patient1/S2,caller
 </code></pre>
-<h2 id="driver-annotation">Driver annotation</h2>
+<h4 id="driver-annotation">Driver annotation</h4>
 <p>You can retrieve tumor-specific drivers in the driver annotation step by specifying the tumor type in the input csv. Pan-cancer drivers will be retrieved by specifying <code>PANCANCER</code> as tumour type in the input csv file.
 For this step, we currently refer to <a href="https://www.nature.com/articles/s41568-020-0290-x">IntOGen latest release</a>, but you can also provide a custom driver table that will be used in the analysis.
 Please note that the tumor types reported in the input file must correspond to those present in the table used for the annotation (default driver table used can be found <a href="https://github.com/caravagnalab/nextflow_modules/blob/main/2023-05-31_IntOGen-Drivers/Unfiltered_drivers.tsv">here</a>)</p>
@@ -316,48 +402,46 @@ dataset1,patient1,S2,patient1_S2.vcf.gz,patient1_S2.vcf.gz.tbi,/CNA/patient1/S2,
 dataset1,patient1,S1,patient1_S1.vcf.gz,patient1_S1.vcf.gz.tbi,/CNA/patient2/S1,caller,patient1/BAM/S1,patient1/BAM/S1.bam.bai,BRCA 
 dataset1,patient2,S2,patient2_S2.vcf.gz,patient2_S2.vcf.gz.tbi,/CNA/patient2/S2,caller,patient2/BAM/S2,patient2/BAM/S2.bam.bai,BRCA 
 </code></pre>
-<h2 id="avaiable-tools">Avaiable tools</h2>
+<h3 id="available-tools">Available tools</h3>
 <p>We report the different tools included in the pipeline.</p>
 <ol>
 <li>
 <p><strong>Gene annotation</strong></p>
-</li>
-<li>
-<p><a href="">EnsemblVEP</a></p>
+<ul>
+<li><a href="">EnsemblVEP</a></li>
+</ul>
 </li>
 <li>
 <p><strong>Driver annotation</strong></p>
 </li>
 <li>
 <p><strong>Quality control</strong></p>
-</li>
-<li>
-<p><a href="https://caravagnalab.github.io/CNAqc/">CNAqc</a></p>
+<ul>
+<li><a href="https://caravagnalab.github.io/CNAqc/">CNAqc</a></li>
+</ul>
 </li>
 </ol>
 <!-- #### TINC
 
-#### INCOMMON -->
+  #### INCOMMON -->
 
 <ol>
 <li>
 <p><strong>Subclonal deconvolution</strong></p>
-</li>
-<li>
-<p><a href="https://caravagnalab.github.io/mobster/">MOBSTER</a></p>
-</li>
+<ul>
+<li><a href="https://caravagnalab.github.io/mobster/">MOBSTER</a></li>
 <li><a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03919-2">PyClone-VI</a></li>
 <li><a href="https://caravagnalab.github.io/VIBER/index.html">VIBER</a></li>
-<li>
-<p><a href="https://caravagnalab.github.io/ctree/">Ctree</a></p>
+<li><a href="https://caravagnalab.github.io/ctree/">Ctree</a></li>
+</ul>
 </li>
 <li>
 <p><strong>Signature deconvolution</strong></p>
-</li>
-<li>
-<p><a href="">SparseSignature</a></p>
-</li>
+<ul>
+<li><a href="">SparseSignature</a></li>
 <li><a href="">SigProfiler</a></li>
+</ul>
+</li>
 </ol>
 <!-- ### Start with annotation
 
@@ -374,9 +458,9 @@ assembly = &quot;GRCh38&quot;
 
 Using VEP plugins:
 `--plugin` - plugin modules should be installed in the Plugin subdirectory of the VEP cache directory (defaults to "$HOME/.vep/").
-To enable specify `--plugin SingleLetterAA`.
+To enable specify `--plugin SingleLetterAA`. -->
 
-### Start with Maftools
+<!-- ### Start with Maftools
 
 `read.maf` function reads multiple MAF files (e.g. multisample/multipatient cohort), summarizes it in various ways and stores it as an MAF object.
 MAF object contains main maf file, summarized data and any associated sample annotations.
@@ -393,9 +477,9 @@ The following parameters can be tuned for this step:
 
 The available tools for this step are XXX.
 
-**NB: When running this step, XXXX***
+**NB: When running this step, XXXX*** -->
 
-#### Examples
+<!-- #### Examples
 
 Minimal input file:
 
@@ -412,10 +496,9 @@ In this example, the sample comes from multiple patients:
 patient1,test_sample,lane_1,test_L001_1.fastq.gz,test_L001_2.fastq.gz
 patient1,test_sample,lane_2,test_L002_1.fastq.gz,test_L002_2.fastq.gz
 patient1,test_sample,lane_3,test_L003_1.fastq.gz,test_L003_2.fastq.gz
-</code></pre>
+``` --&gt;
 
-
-### Clone Tree Inference
+&lt;!-- ### Clone Tree Inference
 
 This step can be started either from XXX files or XXXX. The CSV must contain at least the columns XXX.
 
@@ -426,14 +509,14 @@ The following parameters can be tuned for this step:
 
 The available tools for this step are XXX.
 
-**NB: When running this step, XXXX***
+**NB: When running this step, XXXX*** --&gt;
 
-#### Examples
+&lt;!-- #### Examples
 
 Minimal input file:
 
-
-<pre><code class="language-bash">patient,sample,lane,fastq_1,fastq_2
+```bash
+patient,sample,lane,fastq_1,fastq_2
 patient1,test_sample,lane_1,test_1.fastq.gz,test_2.fastq.gz
 </code></pre>
 
@@ -445,77 +528,72 @@ In this example, the sample comes from multiple patients:
 patient1,test_sample,lane_1,test_L001_1.fastq.gz,test_L001_2.fastq.gz
 patient1,test_sample,lane_2,test_L002_1.fastq.gz,test_L002_2.fastq.gz
 patient1,test_sample,lane_3,test_L003_1.fastq.gz,test_L003_2.fastq.gz
-</code></pre>
+``` --&gt;
 
-
-### Starting with Signature Deconvolution
+&lt;!-- ### Starting with Signature Deconvolution
 
 This step can be started from `rds` multisample CNAqc object. The CSV must contain at least the columns:
 
-
-<pre><code class="language-bash">dataset,joint_table
+```bash
+dataset,joint_table
 
 </code></pre>
 
-When running this step, the mutation's information of the dataset of interest is extracted from multisample `mCNAqc` object and converted to `txt` format in order to import the constructed data file in R or Python. Mutation frequency count data is generated from point mutation data-frames. The optimal signature number and sparsity is determined by cross-validation (SparseSignatures), followed by discovering the signatures within the dataset.
+When running this step, the mutation's information of the dataset of interest is extracted from multisample `mCNAqc` object and converted to `txt` format in order to import the constructed data file in R or Python. Mutation frequency count data is generated from point mutation data-frames. The optimal signature number and sparsity is determined by cross-validation (SparseSignatures), followed by discovering the signatures within the dataset. -->
 
-#### Examples
+<!-- #### Examples
 
 Minimal input file:
 
 
 <pre><code class="language-bash">dataset,joint_table
 CLL,mcnaqc_miltisample.rds
-``` --&gt;
-
-### Updating the pipeline
-
-When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
-
-```bash
-nextflow pull nf-core/tumourevo
 </code></pre>
 
+-->
 
-### Reproducibility
-
-It's a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
-
-First, go to the [nf-core/tumourevo releases page](https://github.com/nf-core/tumourevo/releases) and find the latest version number - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`.
-
-This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future.
-
-## Main arguments
-
-### `-profile`
-
-Use this parameter to choose a configuration profile. Profiles can give configuration presets for different compute environments.
-
-Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Conda) - see below.
-
-> We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
-
-The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to see if your system is available in these configs please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
-
-Note that multiple profiles can be loaded, for example: `-profile test,docker` - the order of arguments is important!
-They are loaded in sequence, so later profiles can overwrite earlier profiles.
-
-If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended.
-
-- `docker`
-    - A generic configuration profile to be used with [Docker](http://docker.com/)
-    - Pulls software from dockerhub: [`nfcore/tumourevo`](http://hub.docker.com/r/nfcore/tumourevo/)
-- `singularity`
-    - A generic configuration profile to be used with [Singularity](http://singularity.lbl.gov/)
-    - Pulls software from DockerHub: [`nfcore/tumourevo`](http://hub.docker.com/r/nfcore/tumourevo/)
-- `conda`
-    - Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker or Singularity.
-    - A generic configuration profile to be used with [Conda](https://conda.io/docs/)
-    - Pulls most software from [Bioconda](https://bioconda.github.io/)
-- `test`
-    - A profile with a complete configuration for automated testing
-    - Includes links to test data so needs no other parameters
-
+<h3 id="updating-the-pipeline">Updating the pipeline</h3>
+<p>When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:</p>
+<pre><code class="language-bash">nextflow pull nf-core/tumourevo
+</code></pre>
+<h3 id="reproducibility">Reproducibility</h3>
+<p>It's a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.</p>
+<p>First, go to the <a href="https://github.com/nf-core/tumourevo/releases">nf-core/tumourevo releases page</a> and find the latest version number - numeric only (eg. <code>1.3.1</code>). Then specify this when running the pipeline with <code>-r</code> (one hyphen) - eg. <code>-r 1.3.1</code>.</p>
+<p>This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future.</p>
+<h2 id="main-arguments">Main arguments</h2>
+<h3 id="-profile"><code>-profile</code></h3>
+<p>Use this parameter to choose a configuration profile. Profiles can give configuration presets for different compute environments.</p>
+<p>Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Conda) - see below.</p>
+<blockquote>
+<p>We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.</p>
+</blockquote>
+<p>The pipeline also dynamically loads configurations from <a href="https://github.com/nf-core/configs">https://github.com/nf-core/configs</a> when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to see if your system is available in these configs please see the <a href="https://github.com/nf-core/configs#documentation">nf-core/configs documentation</a>.</p>
+<p>Note that multiple profiles can be loaded, for example: <code>-profile test,docker</code> - the order of arguments is important!
+They are loaded in sequence, so later profiles can overwrite earlier profiles.</p>
+<p>If <code>-profile</code> is not specified, the pipeline will run locally and expect all software to be installed and available on the <code>PATH</code>. This is <em>not</em> recommended.</p>
+<ul>
+<li><code>docker</code><ul>
+<li>A generic configuration profile to be used with <a href="http://docker.com/">Docker</a></li>
+<li>Pulls software from dockerhub: <a href="http://hub.docker.com/r/nfcore/tumourevo/"><code>nfcore/tumourevo</code></a></li>
+</ul>
+</li>
+<li><code>singularity</code><ul>
+<li>A generic configuration profile to be used with <a href="http://singularity.lbl.gov/">Singularity</a></li>
+<li>Pulls software from DockerHub: <a href="http://hub.docker.com/r/nfcore/tumourevo/"><code>nfcore/tumourevo</code></a></li>
+</ul>
+</li>
+<li><code>conda</code><ul>
+<li>Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker or Singularity.</li>
+<li>A generic configuration profile to be used with <a href="https://conda.io/docs/">Conda</a></li>
+<li>Pulls most software from <a href="https://bioconda.github.io/">Bioconda</a></li>
+</ul>
+</li>
+<li><code>test</code><ul>
+<li>A profile with a complete configuration for automated testing</li>
+<li>Includes links to test data so needs no other parameters</li>
+</ul>
+</li>
+</ul>
 <!-- TODO nf-core: Document required command line parameters -->
 
 <!-- ### `--reads`
@@ -599,10 +677,10 @@ If you prefer, you can specify the full path to your reference genome when you r
 
 Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`. -->
 
-<h2 id="job-resources">Job resources</h2>
+<h3 id="job-resources">Job resources</h3>
 <h3 id="automatic-resubmission">Automatic resubmission</h3>
 <p>Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the steps in the pipeline, if the job exits with an error code of <code>143</code> (exceeded requested resources) it will automatically resubmit with higher requests (2 x original, then 3 x original). If it still fails after three times then the pipeline is stopped.</p>
-<h3 id="custom-resource-requests">Custom resource requests</h3>
+<h2 id="custom-resource-requests">Custom resource requests</h2>
 <p>Wherever process-specific requirements are set in the pipeline, the default value can be changed by creating a custom config file. See the files hosted at <a href="https://github.com/nf-core/configs/tree/master/conf"><code>nf-core/configs</code></a> for examples.</p>
 <p>If you are likely to be running <code>nf-core</code> pipelines regularly it may be a good idea to request that your custom config file is uploaded to the <code>nf-core/configs</code> git repository. Before you do this please can you test that the config file works with your pipeline of choice using the <code>-c</code> parameter (see definition below). You can then create a pull request to the <code>nf-core/configs</code> repository with the addition of your config file, associated documentation file (see examples in <a href="https://github.com/nf-core/configs/tree/master/docs"><code>nf-core/configs/docs</code></a>), and amending <a href="https://github.com/nf-core/configs/blob/master/nfcore_custom.config"><code>nfcore_custom.config</code></a> to include your custom profile.</p>
 <p>If you have any questions or issues please send us a message on <a href="https://nf-co.re/join/slack">Slack</a>.</p>
@@ -689,7 +767,8 @@ Should be a string in the format integer-unit. eg. <code>--max_cpus 1</code></p>
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../output/" class="btn btn-neutral float-left" title="nf-core/tumourevo: Output"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../contents/" class="btn btn-neutral float-left" title="Contents"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../output/" class="btn btn-neutral float-right" title="Output">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -716,8 +795,10 @@ Should be a string in the format integer-unit. eg. <code>--max_cpus 1</code></p>
         </span>
     
     
-      <span><a href="../output/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../contents/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
+    
+      <span><a href="../output/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

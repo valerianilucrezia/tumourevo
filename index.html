@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Documentation for tumourevo, built with nf-core and MkDocs." /><meta name="author" content="Cancer Data Science laboratorn" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Documentation for the tumourevo pipeline." /><meta name="author" content="Cancer Data Science laboratory" />
       <link rel="shortcut icon" href="img/favicon.ico" />
     <title>tumourevo</title>
     <link rel="stylesheet" href="css/theme.css" />
@@ -12,8 +12,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "nf-core/evoverse: Documentation";
-        var mkdocs_page_input_path = "README.md";
+        var mkdocs_page_name = "nf-core/tumourevo";
+        var mkdocs_page_input_path = "index.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -39,18 +39,16 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">nf-core/evoverse: Documentation</a>
-    <ul class="current">
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="contents/">Contents</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="output/">nf-core/tumourevo: Output</a>
+                <li class="toctree-l1"><a class="reference internal" href="usage/">Usage</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="usage/">nf-core/tumourevo: Usage</a>
+                <li class="toctree-l1"><a class="reference internal" href="output/">Output</a>
                 </li>
               </ul>
       </div>
@@ -67,9 +65,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">nf-core/evoverse: Documentation</li>
+      <li class="breadcrumb-item active">nf-core/tumourevo</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/caravagnalab/tumourevo.git/edit/master/docs/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/caravagnalab/tumourevo.git/edit/master/docs/index.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -77,8 +75,47 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="nf-coreevoverse-documentation">nf-core/evoverse: Documentation</h1>
-<p>The nf-core/evoverse documentation is split into the following files:</p>
+                <h1 id="_1"><img alt="nf-core/tumourevo" src="docs/images/nf-core-tumourevo_logo.png" /></h1>
+<p><strong>Tumour evolution from WGS data</strong></p>
+<p><a href="https://github.com/nf-core/tumourevo/actions"><img alt="GitHub Actions CI Status" src="https://github.com/nf-core/tumourevo/workflows/nf-core%20CI/badge.svg" /></a>
+<a href="https://github.com/nf-core/tumourevo/actions"><img alt="GitHub Actions Linting Status" src="https://github.com/nf-core/tumourevo/workflows/nf-core%20linting/badge.svg" /></a>
+<a href="https://www.nextflow.io/"><img alt="Nextflow" src="https://img.shields.io/badge/nextflow-%E2%89%A519.10.0-brightgreen.svg" /></a></p>
+<p><a href="http://bioconda.github.io/"><img alt="install with bioconda" src="https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg" /></a>
+<a href="https://hub.docker.com/r/nfcore/tumourevo"><img alt="Docker" src="https://img.shields.io/docker/automated/nfcore/tumourevo.svg" /></a></p>
+<h2 id="introduction">Introduction</h2>
+<p><strong>nf-core/tumourevo</strong> is a bioinformatics pipeline to model tumour evolution from whole-genome sequencing (WGS) data. The pipeline performs state-of-the-art downstream analysis of variant and copy-number calls from tumour-normal matched sequecing assays, reconstructing the evolutionary processes leading to the observed tumour genome. This analysis can be done  at the level of single samples, multiple samples from the same patient (multi-region/longitudinal assays), and of multiple patients from distinct cohorts.</p>
+<p>The pipeline is built using <a href="https://www.nextflow.io">Nextflow</a>, a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It comes with docker containers making installation trivial and results highly reproducible. The <a href="[https://www.nextflow.io](https://www.nextflow.io/docs/latest/dsl1.html)">Nextflow DSL2</a> implementation of this pipeline uses one container per process which makes it easier to maintain and update software dependencies. Where possible, these processes have been submitted to and installed from <a href="https://github.com/nf-core/modules">nf-core/modules</a> in order to make them available to all nf-core pipelines, and to everyone within the Nextflow community!</p>
+<p align="center">
+    <img title="tumourevo workflow" src="images/workflow_last.png" width=90%>
+</p>
+
+<h2 id="pipeline-summary">Pipeline Summary</h2>
+<ul>
+<li>Quality Control (<code>CNAqc</code>, <code>TINC</code>)</li>
+<li>Variant Annotation (<code>VEP</code>, <code>maftools</code>)</li>
+<li>Driver Annotation (<code>SOPRANO</code>, <code>dndsCV</code>)</li>
+<li>Subclonal Deconvolution (<code>PyClone</code>, <code>MOBSTER</code>, <code>VIBER</code>)</li>
+<li>Clone Tree Inference (<code>ctree</code>)</li>
+<li>Signature Deconvolution (<code>SparseSignatures</code>, <code>SigProfiler</code>)</li>
+<li>Genome Interpreter</li>
+</ul>
+<h2 id="quick-start">Quick Start</h2>
+<p>i. Install <a href="https://nf-co.re/usage/installation"><code>nextflow</code></a></p>
+<p>ii. Install either <a href="https://docs.docker.com/engine/installation/"><code>Docker</code></a> or <a href="https://www.sylabs.io/guides/3.0/user-guide/"><code>Singularity</code></a> for full pipeline reproducibility (please only use <a href="https://conda.io/miniconda.html"><code>Conda</code></a> as a last resort; see <a href="https://nf-co.re/usage/configuration#basic-configuration-profiles">docs</a>)</p>
+<p>iii. Download the pipeline and test it on a minimal dataset with a single command</p>
+<pre><code class="language-bash">nextflow run nf-core/tumourevo -profile test,&lt;docker/singularity/conda/institute&gt;
+</code></pre>
+<blockquote>
+<p>Please check <a href="https://github.com/nf-core/configs#documentation">nf-core/configs</a> to see if a custom config file to run nf-core pipelines already exists for your Institute. If so, you can simply use <code>-profile &lt;institute&gt;</code> in your command. This will enable either <code>docker</code> or <code>singularity</code> and set the appropriate execution settings for your local compute environment.</p>
+</blockquote>
+<p>iv. Start running your own analysis!</p>
+<!-- TODO nf-core: Update the default command above used to run the pipeline -->
+
+<pre><code class="language-bash">nextflow run nf-core/tumourevo -profile &lt;docker/singularity/conda/institute&gt; --reads '*_R{1,2}.fastq.gz' --genome GRCh37
+</code></pre>
+<p>See <a href="usage/">usage docs</a> for all of the available options when running the pipeline.</p>
+<h2 id="documentation">Documentation</h2>
+<p>The nf-core/tumourevo pipeline comes with documentation about the pipeline, found in the <code>docs/</code> directory:</p>
 <ol>
 <li><a href="https://nf-co.re/usage/installation">Installation</a></li>
 <li>Pipeline configuration<ul>
@@ -91,12 +128,27 @@
 <li><a href="output/">Output and how to interpret the results</a></li>
 <li><a href="https://nf-co.re/usage/troubleshooting">Troubleshooting</a></li>
 </ol>
+<!-- TODO nf-core: Add a brief overview of what the pipeline does and how it works -->
+
+<h2 id="credits">Credits</h2>
+<p>nf-core/tumourevo was originally written by Nicola Calonaci, Elena Buscaroli, Katsiaryna Davydzenka, Giorgia Gandolfi, Virginia Gazziero, Asad Sadr, Lucrezia Valeriani and Giulio Caravagna.</p>
+<h2 id="contributions-and-support">Contributions and Support</h2>
+<p>If you would like to contribute to this pipeline, please see the <a href=".github/CONTRIBUTING.md">contributing guidelines</a>.</p>
+<p>For further information or help, don't hesitate to get in touch on <a href="https://nfcore.slack.com/channels/tumourevo">Slack</a> (you can join with <a href="https://nf-co.re/join/slack">this invite</a>).</p>
+<h2 id="citation">Citation</h2>
+<!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi. -->
+<!-- If you use  nf-core/tumourevo for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
+
+<p>You can cite the <code>nf-core</code> publication as follows:</p>
+<blockquote>
+<p><strong>The nf-core framework for community-curated bioinformatics pipelines.</strong></p>
+<p>Philip Ewels, Alexander Peltzer, Sven Fillinger, Harshil Patel, Johannes Alneberg, Andreas Wilm, Maxime Ulysse Garcia, Paolo Di Tommaso &amp; Sven Nahnsen.</p>
+<p><em>Nat Biotechnol.</em> 2020 Feb 13. doi: <a href="https://dx.doi.org/10.1038/s41587-020-0439-x">10.1038/s41587-020-0439-x</a>.<br />
+ReadCube: <a href="https://rdcu.be/b1GjZ">Full Access Link</a></p>
+</blockquote>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="output/" class="btn btn-neutral float-right" title="nf-core/tumourevo: Output">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -123,8 +175,6 @@
     
     
     
-      <span><a href="output/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
   </span>
 </div>
     <script src="js/jquery-3.6.0.min.js"></script>
@@ -143,5 +193,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2024-11-22 11:33:46.977859+00:00
+Build Date UTC : 2024-11-22 15:16:07.859945+00:00
 -->
